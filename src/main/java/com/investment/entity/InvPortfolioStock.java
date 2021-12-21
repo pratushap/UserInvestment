@@ -1,81 +1,69 @@
 package com.investment.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "inv_portfolio_stocks", indexes = {
-        @Index(name = "fk_ps_pf_idx", columnList = "portfolio_id")
+@Table(name = "portfolio", indexes = {
+        @Index(name = "fk_pf_uacc_idx", columnList = "account_id")
 })
 public class InvPortfolioStock {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pf_stock_id", nullable = false)
-    private Integer pfStockId;
+    @GeneratedValue(generator = "increment")
+    @Column(name = "order_id", nullable = false)
+    private Integer order_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "portfolio_id")
-    private InvPortfolio invPortfolio;
-
-    @Column(name = "stock_name", length = 45)
+    @Column(name = "stock_name")
     private String stockName;
+    
+    @Column(name = "stock_quantity")
+    private int stockQuantity;
+    
+    @Column(name = "stock_price")
+    private Double purchasePrice;
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private InvUserAccount invUserAccount;
 
-    @Column(name = "curr_stock_price")
-    private Integer currStockPrice;
+	public Integer getOrder_id() {
+		return order_id;
+	}
 
-    @Column(name = "qty")
-    private Integer qty;
+	public void setOrder_id(Integer order_id) {
+		this.order_id = order_id;
+	}
 
-    @Column(name = "value")
-    private Integer value;
+	public String getStockName() {
+		return stockName;
+	}
 
-    public Integer getPfStockId() {
-        return pfStockId;
-    }
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
 
-    public void setPfStockId(Integer pfStockId) {
-        this.pfStockId = pfStockId;
-    }
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
 
-    public InvPortfolio getInvPortfolio() {
-        return invPortfolio;
-    }
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
+	}
 
-    public void setInvPortfolio(InvPortfolio invPortfolio) {
-        this.invPortfolio = invPortfolio;
-    }
+	public Double getPurchasePrice() {
+		return purchasePrice;
+	}
 
-    public String getStockName() {
-        return stockName;
-    }
+	public void setPurchasePrice(Double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
 
-    public void setStockName(String stockName) {
-        this.stockName = stockName;
-    }
+	public InvUserAccount getInvUserAccount() {
+		return invUserAccount;
+	}
 
-    public Integer getCurrStockPrice() {
-        return currStockPrice;
-    }
+	public void setInvUserAccount(InvUserAccount invUserAccount) {
+		this.invUserAccount = invUserAccount;
+	}
 
-    public void setCurrStockPrice(Integer currStockPrice) {
-        this.currStockPrice = currStockPrice;
-    }
-
-    public Integer getQty() {
-        return qty;
-    }
-
-    public void setQty(Integer qty) {
-        this.qty = qty;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
+  
 }

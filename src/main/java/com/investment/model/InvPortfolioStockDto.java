@@ -3,10 +3,6 @@ package com.investment.model;
 import java.io.Serializable;
 
 public class InvPortfolioStockDto implements Serializable {
-
-   // private  Integer pfStockId;
-  //  private  Integer portfolioId;
-   // private  String portfolioPortfolioName;
     private  String stockName;
     private  Integer currStockPrice;
     private  Integer qty;
@@ -14,32 +10,6 @@ public class InvPortfolioStockDto implements Serializable {
 
     public InvPortfolioStockDto() {
     }
-
-/*
-    public Integer getPfStockId() {
-        return pfStockId;
-    }
-
-    public void setPfStockId(Integer pfStockId) {
-        this.pfStockId = pfStockId;
-    }
-
-    public Integer getPortfolioId() {
-        return portfolioId;
-    }
-
-    public void setPortfolioId(Integer portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public String getPortfolioPortfolioName() {
-        return portfolioPortfolioName;
-    }
-
-    public void setPortfolioPortfolioName(String portfolioPortfolioName) {
-        this.portfolioPortfolioName = portfolioPortfolioName;
-    }
-*/
 
     public String getStockName() {
         return stockName;

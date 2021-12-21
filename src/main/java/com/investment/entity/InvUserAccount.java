@@ -1,47 +1,65 @@
 package com.investment.entity;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
-@Table(name = "inv_user_account", indexes = {
+@Table(name = "account", indexes = {
         @Index(name = "fk_ua_usr_idx", columnList = "user_id")
 })
 public class InvUserAccount {
-    @Id
+	@Id
+    @Column(name = "account_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_num", nullable = false)
-    private Integer accountNum;
+    private Integer accountId;
+	
+    @Column(name = "account_number", nullable = false)
+    private Long accountNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private InvUser invUser;
+    @Column(name = "account_balance")
+    private Double balance;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "invUserAccount")
-    List<InvPortfolio> invPortfolio = new ArrayList<>();
+    List<InvPortfolioStock> invPortfolioStock;
 
-    public Integer getAccountNum() {
-        return accountNum;
-    }
+	public Integer getAccountId() {
+		return accountId;
+	}
 
-    public void setAccountNum(Integer accountNum) {
-        this.accountNum = accountNum;
-    }
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
 
-    public InvUser getInvUser() {
-        return invUser;
-    }
+	public Long getAccountNumber() {
+		return accountNumber;
+	}
 
-    public void setInvUser(InvUser invUser) {
-        this.invUser = invUser;
-    }
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
 
-    public List<InvPortfolio> getInvPortfolio() {
-        return invPortfolio;
-    }
+	public Double getBalance() {
+		return balance;
+	}
 
-    public void setInvPortfolio(List<InvPortfolio> invPortfolio) {
-        this.invPortfolio = invPortfolio;
-    }
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public List<InvPortfolioStock> getInvPortfolioStock() {
+		return invPortfolioStock;
+	}
+
+	public void setInvPortfolioStock(List<InvPortfolioStock> invPortfolioStock) {
+		this.invPortfolioStock = invPortfolioStock;
+	}
+
+   
 }

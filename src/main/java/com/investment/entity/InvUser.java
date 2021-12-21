@@ -1,11 +1,10 @@
 package com.investment.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "inv_user")
+@Table(name = "user")
 public class InvUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,20 +17,9 @@ public class InvUser {
     @Column(name = "password", length = 45)
     private String password;
 
-    @Column(name = "status")
-    private Boolean status;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "invUser")
-    List<InvUserAccount> invUserAccounts = new ArrayList<>();
-
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    List<InvUserAccount> invUserAccount;
 
     public String getPassword() {
         return password;
@@ -57,11 +45,13 @@ public class InvUser {
         this.userId = userId;
     }
 
-    public List<InvUserAccount> getInvUserAccounts() {
-        return invUserAccounts;
-    }
+	public List<InvUserAccount> getInvUserAccount() {
+		return invUserAccount;
+	}
 
-    public void setInvUserAccounts(List<InvUserAccount> invUserAccounts) {
-        this.invUserAccounts = invUserAccounts;
-    }
+	public void setInvUserAccount(List<InvUserAccount> invUserAccount) {
+		this.invUserAccount = invUserAccount;
+	}
+
+   
 }
